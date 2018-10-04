@@ -1,0 +1,2 @@
+# dotslate
+My Slate Config
