@@ -1,0 +1,103 @@
+#config
+
+# Default to the current screen if the screen the reference does not exist.
+config defaultToCurrentScreen true/scr
+
+# The base value for nudge percent calculation
+config nudgePercentOf screenSize
+
+# The base value for resize percent calculation
+config resizePercentOf screenSize
+
+#show icons on window hints
+config windowHintsShowIcons true
+
+#show icons for windows that are below focus
+config windowHintsIgnoreHiddenWindows false
+
+#spread out the window hint options
+config windowHintsSpread true
+
+# Monitor Aliases
+
+alias mon-4k  3840x2160
+alias mon-aux  1920x1080
+
+Screen-configuration resolutions:${mon-aux},${mon-4k}
+
+#====================================================================================== Positions
+
+alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
+bind pad0:ctrl ${full}
+
+alias right-third-top corner top-right resize:(screenSizeX/9)*3;(screenSizeY/9)*5
+bind pad9:ctrl ${right-third-top}
+
+alias right-third-bottom corner bottom-right resize:(screenSizeX/9)*3;(screenSizeY/9)*4
+bind pad3:ctrl ${right-third-bottom}
+
+alias right-third move screenOriginX+((screenSizeX/9)*6);screenOriginY ((screenSizeX/9)*6);screenSizeY
+bind pad6:ctrl ${right-third}
+
+alias left-third-top corner top-left resize:(screenSizeX/9)*2;(screenSizeY/9)*5
+bind pad7:ctrl ${left-third-top}
+
+alias left-third-bottom corner bottom-left resize:(screenSizeX/9)*2;(screenSizeY/9)*4
+bind pad1:ctrl ${left-third-bottom}
+
+alias left-third move screenOriginX;screenOriginY (screenSizeX/9)*2;screenSizeY
+bind pad4:ctrl ${left-third}
+
+alias right-half move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+bind pad6:cmd;ctrl ${right-half}
+
+alias left-half move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+bind pad4:cmd;ctrl ${left-half}
+
+alias middle-third move screenOriginX+(screenSizeX/9)*2;screenOriginY (screenSizeX/9)*4;screenSizeY
+bind pad5:ctrl ${middle-third}
+
+alias middle-third-top move screenOriginX+(screenSizeX/9)*2;(screenOriginY/9)*2 (screenSizeX/9)*4;(screenSizeY/9)*5
+bind pad8:ctrl ${middle-third-top}
+
+alias middle-third-bottom move screenOriginX+(screenSizeX/9)*2;screenOriginY+(screenSizeY/9)*5 (screenSizeX/9)*4;screenOriginY+(screenSizeY/9)*4
+bind pad2:ctrl ${middle-third-bottom}
+
+alias top-half move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
+bind pad8:cmd;ctrl ${top-half}
+
+alias top-third move screenOriginX;screenOriginY screenSizeX;screenSizeY-300
+bind pad*:cmd;ctrl ${top-third}
+
+alias bottom-half move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
+bind pad2:cmd;ctrl ${bottom-half}
+
+alias bottom-half-aux ${bottom-half} 0
+alias middle-third-bottom-4k ${middle-third-bottom} 1
+
+# quickly moving window to other monitor using the arrow
+bind left:cmd ${bottom-half-aux} 
+bind right:cmd ${middle-third-bottom-4k} 
+
+#====================================================================================== Layouts
+
+layout work-php 'PhpStorm'  ${middle-third} 
+layout work-php 'iTerm2'  ${bottom-half-aux} 
+layout work-php 'Google Chrome' ${right-third-top} 
+layout work-php 'Sequel Pro' ${right-third-bottom} 
+layout work-php 'Skype' ${left-third-top} 
+bind pad*:ctrl layout work-php
+default work-php resolutions:${mon-aux},${mon-4k}
+
+#====================================================================================== Other
+
+bind pad-:ctrl relaunch
+
+#======= bind window switching keys
+
+bind e:cmd hint QWERTYUIOP
+bind c:cmd;alt focus 'Google Chrome'
+bind i:cmd;alt focus 'iTerm2'
+bind m:cmd;alt focus 'Sequel Pro'
+bind p:cmd;alt focus 'PhpStorm'
+bind s:cmd;alt focus 'Skype'
